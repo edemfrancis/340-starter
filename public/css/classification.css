@@ -1,0 +1,63 @@
+h1{
+    /* text-align: center; */
+    margin: 1px;
+}
+
+#inv-display{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    text-align: center;
+    gap: 10px;
+    margin: 3px;
+}
+.class-view{
+    list-style: none;
+    border-radius: 3px;
+    border: .5px solid rgba(0, 0, 0, 0.903);
+}
+li{list-style: none;}
+img{
+    border-radius: 5px;
+}
+img:hover{
+    margin: 2px;
+}
+hr{
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Inventory One view look out */
+#one_view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#one_view img{
+    width: 80%;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.detail{
+    margin-right: 5px;
+}
+
+.detail li{
+    margin-top: 15px;
+    background-color: rgba(189, 240, 240, 0.445);
+    border-radius: 2px;
+}
+
+/* @media mobile view */
+@media  screen and (max-width: 35rem) {
+    #one_view{
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+    }
+    #one_view img{
+        width: 90%;
+        justify-content: center;
+        margin: 4px auto;
+    }
+  }

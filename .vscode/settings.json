@@ -1,0 +1,34 @@
+{
+	"sqltools.connections": [
+		{
+			"pgOptions": {
+				"ssl": {
+					"rejectUnauthorized": true
+				}
+			},
+			"previewLimit": 50,
+			"server": "localhost",
+			"driver": "PostgreSQL",
+			"name": "Render",
+			"connectString": "postgresql://cse430_7fxk_user:YXIFmdRfVFsDYtIR47iKAC12P64XbtV7@dpg-d3405pqdbo4c73bite0g-a.oregon-postgres.render.com/cse430_7fxk"
+		}
+	],
+	"workbench.editor.labelFormat": "short",
+	"workbench.editor.defaultBinaryEditor": "default",
+	"workbench.editor.customLabels.enabled": true,
+	"workbench.editor.autoLockGroups": {
+		"default": true
+	},
+	"prettier.bracketSpacing": true,
+	"prettier.endOfLine": "lf",
+	"prettier.printWidth": 85,
+	"prettier.proseWrap": "preserve",
+	"prettier.jsxSingleQuote": true,
+	"prettier.insertPragma": false,
+	"prettier.embeddedLanguageFormatting": "auto",
+	"prettier.arrowParens": "always",
+	"editor.fontSize": 10,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.wordWrap": "on",
+	"editor.formatOnSave": false
+}

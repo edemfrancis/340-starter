@@ -49,9 +49,7 @@ nav{
   width: 99%;
   margin: 1px;
   padding: 6px;
-  background-color: rgba(0, 0, 0, 0.784);
-  border-radius: 3px;
-  border: 0.8px solid rgba(220, 223, 183, 0.837);
+  background-color: black;
 }
 .home-page{
   background-color: rgba(255, 0, 0, 0.349);
@@ -65,14 +63,6 @@ nav{
   margin: 2px;
   padding: 3px;
 }
-
-nav ul li{
-  list-style: none;
-  width: 100%;
-  text-align: center;
-  justify-content: center; 
-}
-
 .ul-list li a{
   color: white;
   text-decoration: none;
@@ -80,14 +70,19 @@ nav ul li{
 }
 .ul-list li a:hover {
   color: rgba(0, 0, 0, 0.889);
-  background-color: rgb(252, 252, 252);
-  margin: 6px;
-  padding: 5px;
 }
-.ul-list li:hover{
-  background-color: rgba(223, 210, 193, 0.821);
+nav ul li{
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  border-radius: 3px;
+  padding: 10px;
 }
-
+nav ul li:hover{
+  background-color: rgba(255, 255, 255, 0.885);
+  margin: 1px;
+}
 
 /* Css for hero image and context*/
 .declan{
