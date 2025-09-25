@@ -29,6 +29,13 @@
 	"prettier.arrowParens": "always",
 	"editor.fontSize": 10,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"editor.wordWrap": "on",
-	"editor.formatOnSave": false
+	"editor.wordWrap": "off",
+	"editor.formatOnSave": true,
+	"editor.autoIndentOnPasteWithinString": true,
+	"editor.hover.above": false,
+	"editor.hover.enabled": false,
+	"editor.hover.sticky": false,
+	"editor.insertSpaces": true,
+	"editor.useTabStops": false,
+	"editor.overtypeOnPaste": true
 }
