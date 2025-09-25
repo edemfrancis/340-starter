@@ -42,4 +42,16 @@ invCont.buildByDetail = async function (req, res, next) {
 		return "Error! Vehicle not available";
 	}
 };
+
+// Error message for testing the error route
+// week - 3 Assignment was Created
+invCont.BuildBrokenPage = async function (req, res, next) {
+	let nav = await utilities.getNav();
+	res.render("./inventory/broken", {
+		title: "Oops, error",
+		errors: null,
+		nav,
+	});
+};
+
 module.exports = invCont;

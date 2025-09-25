@@ -129,4 +129,10 @@ Util.buildSpecificViewById = async function (data) {
 	return detalView;
 };
 
+// week 3 - Assignment was Created
+Util.buildBrokenPage = function () {
+	let broken = "";
+	return broken;
+};
+
 module.exports = Util;
