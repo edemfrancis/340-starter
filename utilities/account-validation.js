@@ -3,6 +3,7 @@ const utilities = require("../utilities");
 
 const { body, validationResult } = require("express-validator");
 const validate = {};
+const accountModel = require("../models/account-model");
 
 /*  **********************************
  *  Registration Data Validation Rules
@@ -28,11 +29,15 @@ validate.registationRules = () => {
 		// valid email is required and cannot already exist in the DB
 		body("account_email")
 			.trim()
-			.escape()
-			.notEmpty()
 			.isEmail()
 			.normalizeEmail() // refer to validator.js docs
-			.withMessage("A valid email is required."),
+			.withMessage("A valid email is required.")
+			.custom(async (account_email) => {
+				const emailExists = await accountModel.checkExistingEmail(account_email);
+				if (emailExists) {
+					throw new Error("Email exists. Please log in or use different email");
+				}
+			}),
 
 		// password is required and must be strong password
 		body("account_password")
@@ -68,6 +73,42 @@ validate.checkRegData = async (req, res, next) => {
 		});
 		return;
 	}
+	next();
+};
+
+/***********************
+ * Login Validation Rules
+ */
+validate.loginRules = () => {
+	return [
+		body("account_email")
+			.trim()
+			.isEmail()
+			.normalizeEmail()
+			.withMessage("Kindly provide a valid email address"),
+
+		body("account_password")
+			.trim()
+			.matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+.\.[a-zA-Z]{2,}$/)
+			.withMessage("Incorrect Login Credentials"),
+	];
+};
+
+validate.checkLoginData = async (req, res, next) => {
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		const nav = await utilities.getNav();
+		const { account_email } = req.body;
+
+		return res.render("account/login", {
+			title: "Login",
+			nav,
+			account_email,
+			errors: null,
+		});
+	}
+
 	next();
 };
 
