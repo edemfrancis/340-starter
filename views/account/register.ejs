@@ -1,0 +1,68 @@
+<h1><%= title%></h1>
+
+<% if (errors) { %>
+<ul class="notice">
+	<% errors.array().forEach(error => { %>
+	<li><%= error.msg %></li>
+	<% }) %>
+</ul>
+<% } %>
+<div id="form-container">
+	<form action="/account/register" method="post">
+		<fieldset>
+			<legend>Input Informations</legend>
+			<label
+				>First Name<input
+					type="text"
+					name="account_firstname"
+					required
+					value="<%= locals.account_firstname %>"
+			/></label>
+			<label
+				>Last Name<input
+					type="text"
+					name="account_lastname"
+					required
+					value="<%= locals.account_lastname %>"
+			/></label>
+			<label
+				>Email Address<input
+					type="email"
+					name="account_email"
+					required
+					placeholder="Enter a valid email address"
+					value="<%= locals.account_email %>"
+			/></label>
+			<label
+				>Password<input
+					type="password"
+					name="account_password"
+					id="password"
+					pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+					required
+			/></label>
+			<span
+				>Passwords must be at least 12 characters and contain at least 1 number, 1
+				capital letter and 1 special character</span
+			>
+		</fieldset>
+
+		<span class="check-button">Show Password</span>
+		<input type="submit" value="Register" />
+	</form>
+</div>
+
+<script>
+	const button = document.getElementById("check-button");
+	button.addEventListener("click", () => {
+		const password = document.querySelector("#password");
+		const holdType = password.getAttribute("type");
+		if (holdType == "password") {
+			password.setAttribute("type", "text");
+			button.innerHTML = "Hide Password";
+		} else {
+			password.setAttribute("type", "password");
+			button.innerHTML = "Show Password";
+		}
+	});
+</script>

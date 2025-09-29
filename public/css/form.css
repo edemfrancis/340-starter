@@ -1,0 +1,66 @@
+form fieldset {
+	margin: 0.2rem 0.1rem;
+	border: 1px solid #db9898dd;
+	border-radius: 5px;
+	padding: 0.5rem 2%;
+}
+form legend {
+	color: rgb(2, 37, 2);
+	padding: 0 0.5rem;
+}
+form label {
+	display: block;
+	padding-top: 1rem;
+	font-size: 1rem;
+	text-align: left;
+}
+
+form input[type="password"],
+form input[type="email"],
+form input[type="text"] {
+	display: block;
+	border: 1px solid rgb(127, 127, 187);
+	padding: 0.75rem;
+	border-radius: 5px;
+	width: 100%;
+	max-width: 400px;
+	appearance: none;
+}
+
+form input[type="submit"] {
+	border: none;
+	background-color: #b97570d5;
+	color: #ffff;
+	border-radius: 7px;
+	padding: 0.5rem;
+	width: 40%;
+	max-width: 400px;
+	margin: 1rem 2% 2rem 2%;
+	box-shadow: 1px 1px 2px #473e3e99;
+	cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+	background-color: #caa9a7d5;
+	box-shadow: 4px 4px 4px black;
+}
+
+#form-container {
+	width: 400px;
+	text-align: left;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.check-button {
+	width: 200px;
+}
+
+/* Error message display when input field is empty or not field out properly */
+.notice ul {
+	margin: 5px;
+	padding: 10px;
+}
+.notice li {
+	color: red;
+}
