@@ -1,0 +1,16 @@
+/* @media mobile view */
+@media screen and (min-width: 35rem) {
+	#upgrades-reviews {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		align-content: center;
+	}
+
+	#button {
+		display: none;
+	}
+	.horizontal-ul,
+	.horizontal-ul.open {
+		display: flex;
+	}
+}

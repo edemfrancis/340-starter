@@ -1,0 +1,30 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <% if (errors) { %>
+
+<ul class="notice">
+	<% errors.array().forEach(error => { %>
+	<li><%= error.msg %></li>
+	<% }) %>
+</ul>
+<% } %>
+
+<!-- display errors -->
+
+<div id="form-container">
+	<form action="/inv/add-classView" method="post">
+		<fieldset>
+			<legend></legend>
+			<h3>classification name</h3>
+			<i>NAME MUST BE ALPHABETIC characters ONLY</i>
+			<label
+				><input
+					type="text"
+					name="classification_name"
+					title="Enter a classification name without space"
+					required
+			/></label>
+		</fieldset>
+		<a href="/inv/"><input type="submit" value="add-classification-name" /></a>
+	</form>
+</div>

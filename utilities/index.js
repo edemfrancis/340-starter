@@ -31,7 +31,9 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function (data) {
 	let grid;
 	if (Array.isArray(data) && data.length > 0) {
-		grid = '<ul id="inv-display">';
+		grid += '<button id="button">';
+		grid += "</button>";
+		grid = '<ul class="horizontal-ul"  id="inv-display">';
 		data.forEach((vehicle) => {
 			grid += '<li class="class-view single-view">';
 			grid +=
@@ -133,6 +135,25 @@ Util.buildSpecificViewById = async function (data) {
 Util.buildBrokenPage = function () {
 	let broken = "";
 	return broken;
+};
+
+/* ********************
+ ** Week 4 Assisgnment
+ */
+Util.buildClassificationList = async function (classification_id = null) {
+	let data = await invModel.getClassifications();
+	let classificationList =
+		'<select name="classification_id" id="classificationList" required>';
+	classificationList += "<option value=''>Choose a Classification</option>";
+	data.rows.forEach((row) => {
+		classificationList += '<option value="' + row.classification_id + '"';
+		if (classification_id != null && row.classification_id == classification_id) {
+			classificationList += " selected ";
+		}
+		classificationList += ">" + row.classification_name + "</option>";
+	});
+	classificationList += "</select>";
+	return classificationList;
 };
 
 module.exports = Util;
