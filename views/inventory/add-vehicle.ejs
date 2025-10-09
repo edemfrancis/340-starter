@@ -9,11 +9,11 @@
 <% } %>
 
 <div>
-	<form class="/inv/add-vehicle" method="post">
+	<form action="/inv/add-vehicle" method="post">
 		<p>*All fields are required</p>
 		<fieldset class="form--fieldset addvehicle-form--fieldset">
 			<label for="classification_id">Classification:</label>
-			<%- classSelect %>
+			<%- classificationSelect %>
 
 			<label for="inv_make">Make:</label>
 			<input

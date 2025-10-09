@@ -38,4 +38,22 @@ router
 		utilities.handleErrors(invController.addVehicle)
 	);
 
+// Route to build the inventory by classification view was added in week 5
+router.get("/getInventory/:classification_id", invController.getInventoryJSON);
+
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+
+// This Route was added in week 5
+// Update Routes
+router.post(
+	"/update/",
+	regValidate.vehicleRules(),
+	regValidate.checkUpdateData,
+	utilities.handleErrors(invController.updateInventory)
+);
+
+// Delete Routes
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteView));
+router.post("/delete/", utilities.handleErrors(invController.deleteViewInventory));
+
 module.exports = router;

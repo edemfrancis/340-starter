@@ -162,6 +162,64 @@ footer {
 	margin-top: 20px;
 }
 
+/* Message success css and and error */
+.success,
+.error,
+.notice {
+  list-style: none;
+  padding: 0;
+  max-width: 10em;
+  
+}
+.success li,
+.error li,
+.notice li {
+  padding: 1em;
+  margin: 1em;
+  border-radius: 1em;
+}
+.success li {
+  background-color: rgb(157, 219, 157);
+  border: 3px solid rgb(125, 194, 125);
+}
+.error li {
+  background-color: rgb(236, 129, 129);
+  border: 3px solid rgb(216, 103, 103);
+}
+.notice li {
+  background-color: rgb(245, 211, 119);
+  border: 3px solid rgb(244, 196, 63);
+}
+
+/* Css for account view */
+.management-links {
+  padding: 1em;
+  margin-top: -2em;
+  margin-bottom: -2em;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.management-links a {
+  padding: 0.6em;
+  margin: 1em;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.1em;
+  color: black;
+  border-radius: 15px;
+}
+.management-links a:hover {
+  background-color: rgb(45, 44, 48);
+  color: white;
+}
+
+.account_h2, .account_p, .account_h3{
+	  text-align: center;
+	  background-color: rgba(240, 170, 240, 0.349);
+}
+
 /* @media mobile view */
 @media screen and (min-width: 35rem) {
 	#upgrades-reviews {

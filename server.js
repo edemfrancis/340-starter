@@ -20,6 +20,8 @@ const utilities = require("./utilities/");
 const accountRoute = require("./routes/accountRoute");
 /// added in week 4
 const bodyParser = require("body-parser");
+// This was added in week 5
+const cookieParser = require("cookie-parser");
 
 /* ***********************
  * View and Templates
@@ -51,6 +53,12 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json()); // for parsing application/json added in week 4
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+// This was added in week 5
+//login middleware
+app.use(cookieParser());
+//middleware to check the JWT token validity
+app.use(utilities.checkJWTToken);
+
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "./layouts/layout"); // not at views root
@@ -62,11 +70,12 @@ app.use(static);
 app.get("/", utilities.handleErrors(baseController.buildHome));
 // Week 3 - Inventory Route was added
 app.use("/inv", inventoryRoute);
-// File Not Found Route - must be last route in list
-// app.use(async (req, res, next) => {
-// 	next({ status: 404, message: "Sorry, we appear to have lost that page." });
-// });
 app.use("/account", accountRoute);
+
+// File Not Found Route - must be last route in list
+app.use(async (req, res, next) => {
+	next({ status: 404, message: "Sorry, we appear to have lost that page." });
+});
 
 /* ***********************
  * Local Server Information

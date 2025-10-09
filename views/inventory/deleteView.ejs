@@ -1,0 +1,57 @@
+<% if (title) { %>
+	<h1>
+		<%= title %>
+	</h1>
+	<% } else { res.redirect('/') } %>
+
+		<!-- displays error messages -->
+		<%- messages() %>
+
+			<!-- display errors -->
+			<% if (errors) { %>
+				<ul class="notice">
+					<% errors.array().forEach(error=> { %>
+						<li>
+							<%= error.msg %>
+						</li>
+						<% }) %>
+				</ul>
+				<% } %>
+
+					<div>
+						<form id="updateForm" action="/inv/delete" method="post">
+							
+							<fieldset class="form--fieldset addvehicle-form--fieldset">
+								<label for="classification_id">Classification:</label>
+								<%- classificationSelect %>
+									<table id="inventoryDisplay"></table>
+									<noscript>JavaScript must be enabled to use this page.</noscript>
+
+									<label for="inv_make">Make:</label>
+									<input type="text" id="inv_make" name="inv_make" readonly placeholder="Min of 3 characters"
+										value="<%= locals.inv_make %>" minlength="3" required />
+
+									<label for="inv_model">Model:</label>
+									<input type="text" id="inv_model" name="inv_model" readonly placeholder="Min of 3 characters"
+										value="<%= locals.inv_model %>" minlength="3" required />
+
+									<label for="inv_year">Year:</label>
+									<input type="text" id="inv_year" name="inv_year" readonly placeholder="4-digit year"
+										value="<%= locals.inv_year %>" pattern="^\d{4}$" required />
+
+									<label for="inv_price">Price:</label>
+									<input type="number" id="inv_price" name="inv_price"
+										placeholder="Decimal or integer" readonly value="<%= locals.inv_price %>" required />
+
+                                    <p>Confirm Deletion - The delete is permanent.</p>
+
+									<input type="submit" name="submit" value="Delete" id="updateBtn" />
+
+
+									<input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%=
+										locals.inv_id %>"
+										<% } %>>
+							</fieldset>
+						</form>
+					</div>
+					<script src="../../js/inventory.js"></script>

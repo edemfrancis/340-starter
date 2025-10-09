@@ -110,12 +110,12 @@ validate.checkVehicleData = async (req, res, next) => {
 	errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		let nav = await utilities.getNav();
-		let classSelect = await utilities.buildClassificationList(classification_id);
+		let classificationSelect = await utilities.buildClassificationList(classification_id);
 		res.render("./inventory/add-vehicle", {
 			errors,
 			title: "Add Vehicle",
 			nav,
-			classSelect,
+			classificationSelect,
 			inv_make,
 			inv_model,
 			inv_year,
@@ -129,6 +129,103 @@ validate.checkVehicleData = async (req, res, next) => {
 		return;
 	}
 	next();
+};
+
+/* ******************************
+ * Check class data and return errors or continue to registration
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+	const {
+		classification_id,
+		inv_make,
+		inv_model,
+		inv_year,
+		inv_description,
+		inv_image,
+		inv_thumbnail,
+		inv_price,
+		inv_miles,
+		inv_color,
+		inv_id,
+	} = req.body;
+	let errors = [];
+	errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		let nav = await utilities.getNav();
+		let classificationSelect = await utilities.buildClassificationList(classification_id);
+		res.render("./inventory/edit-inventory", {
+			errors,
+			inv_id,
+			title: `Edit ${inv_make} ${inv_model}`,
+			nav,
+			classificationSelect,
+			inv_make,
+			inv_model,
+			inv_year,
+			inv_description,
+			inv_image,
+			inv_thumbnail,
+			inv_price,
+			inv_miles,
+			inv_color,
+		});
+		return;
+	}
+	next();
+};
+
+/*  **********************************
+ *  Add Class Validation Rules
+ * ********************************* */
+validate.newVehicleRules = () => {
+	return [
+		body("classification_id")
+			.isNumeric()
+			.withMessage("Please choose a classification"),
+		body("inv_make")
+			.trim()
+			.isLength({ min: 3 })
+			.withMessage("Make must be longer than 3 characters"),
+
+		body("inv_model")
+			.trim()
+			.isLength({ min: 3 })
+			.withMessage("Model must be longer than 3 characters"),
+
+		body("inv_year")
+			.trim()
+			.isNumeric({ no_symbols: true })
+			.withMessage("Year must be digits only")
+			.isLength({ min: 4, max: 4 })
+			.withMessage("Year must be 4 digits"),
+
+		body("inv_description")
+			.trim()
+			.isLength({ min: 1 })
+			.withMessage("Please provide a description"),
+
+		body("inv_image")
+			.trim()
+			.isLength({ min: 1 })
+			.withMessage("Please provide an image path"),
+
+		body("inv_thumbnail")
+			.trim()
+			.isLength({ min: 1 })
+			.withMessage("Please provide an thumbnail path"),
+
+		body("inv_price").trim().isNumeric().withMessage("Please input valid price"),
+
+		body("inv_miles")
+			.trim()
+			.isNumeric({ no_symbols: true })
+			.withMessage("Please input miles without commas or decimals"),
+
+		body("inv_color")
+			.trim()
+			.isLength({ min: 1 })
+			.withMessage("Please provide a vehicle color"),
+	];
 };
 
 module.exports = validate;
