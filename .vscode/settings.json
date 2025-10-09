@@ -28,7 +28,7 @@
 	"prettier.embeddedLanguageFormatting": "auto",
 	"prettier.arrowParens": "always",
 	"editor.fontSize": 10,
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.defaultFormatter": null,
 	"editor.wordWrap": "off",
 	"editor.formatOnSave": true,
 	"editor.autoIndentOnPasteWithinString": true,
