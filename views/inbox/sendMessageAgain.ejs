@@ -1,11 +1,15 @@
 <% if (title) { %>
-    <h1><%= title %></h1>
-  <% } else {
-    res.redirect('/')
-  } %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <% if (errors) { %>
+
+  <!-- display error message -->
+<ul class="notice">
+	<% errors.array().forEach(error => { %>
+	<li><%= error.msg %></li>
+	<% }) %>
+</ul>
+<% } %>
   
-  <!-- displays error messages -->
-  <%- messages() %>
   
   <!-- display the contents of the page -->
   <form class="form" action="/inbox/sendMessageAgain" method="post">
@@ -14,7 +18,7 @@
       <select name="message_to" id="message_to">
         <%- accountSelect %>
       </select>
-      
+
       <input type="hidden" id="message_from" name="message_from" value="<%= locals.message_from ? locals.message_from : accountData.account_id %>">
   
       <label for="message_subject">Subject:</label>
