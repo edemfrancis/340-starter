@@ -28,18 +28,19 @@ async function getInventoryByClassificationId(classification_id) {
 	}
 }
 
-// week 3 - Assignment was Created
-// async function getInventoryById(invId) {
-// 	try {
-// 		const sql = "SELECT * FROM inventory WHERE inv_id = $1";
-// 		const data = await pool.query(sql, [invId]);
-// 		return data.rows[0];
-// 	} catch (error) {
-// 		throw error;
-// 	}
-// }
+// week 3 - Assignment was Created in week 3
+// This was perfect for building the detailed view
+async function getInventoryById(inv_id) {
+	try {
+		const sql = `SELECT * FROM inventory WHERE inv_id = $1`;
+		const data = await pool.query(sql, [inv_id]);
+		return data.rows;
+	} catch (error) {
+		console.error(" There was an error retrieving Inventory-Data. " + error);
+	}
+}
 
-// week 3 - Assignment was Created
+// week 3 - Assignment was Created, This was perfect for editing the inventory
 async function getInventoryByInvId(inv_id) {
 	try {
 		const data = await pool.query(
@@ -174,6 +175,7 @@ async function deleteInventory(inv_id) {
 module.exports = {
 	getClassifications,
 	getInventoryByClassificationId,
+	getInventoryById,
 	getInventoryByInvId,
 	addClassificationName,
 	ifClasificationNameExists,

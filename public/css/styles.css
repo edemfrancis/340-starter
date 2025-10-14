@@ -215,9 +215,13 @@ footer {
   color: white;
 }
 
-.account_h2, .account_p, .account_h3{
+.account_h2, .account_p, .account_h3, .account_p{
 	  text-align: center;
 	  background-color: rgba(240, 170, 240, 0.349);
+}
+.inbox-links a {
+text-emphasis: none;
+background-color: rgba(221, 185, 185, 0.466);
 }
 
 /* @media mobile view */

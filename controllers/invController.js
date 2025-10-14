@@ -23,8 +23,8 @@ invCont.buildByClassificationId = async function (req, res, next) {
 // week - 3 Assignment was Created
 invCont.buildByDetail = async function (req, res, next) {
 	try {
-		const get_details_by_class_id = req.params.classification_id;
-		const data = await invModel.getInventoryByInvId(get_details_by_class_id);
+		const get_details_by_class_id = req.params.inv_id;
+		const data = await invModel.getInventoryById(get_details_by_class_id);
 		const detalView = await utilities.buildSpecificViewById(data);
 		let nav = await utilities.getNav();
 		const year = data[0].inv_year;
