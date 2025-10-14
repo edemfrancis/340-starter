@@ -1,5 +1,6 @@
 const invModel = require("../models/invModel");
 const Util = {};
+const msgModel = require("../models/message-model");
 
 // Added in week 5
 const jwt = require("jsonwebtoken");
@@ -194,6 +195,137 @@ Util.checkLogin = (req, res, next) => {
 	} else {
 		req.flash("notice", "Please log in.");
 		return res.redirect("/account/login");
+	}
+};
+
+// Added in week 6
+/* ****************************************
+ *  Message Utilities
+ * ************************************ */
+/* ************************
+ * Constructs the account HTML select options
+ ************************** */
+Util.getAccountSelect = async function (selectedOption) {
+	let data = await msgModel.fetchAllAccounts();
+	let options = `<option value="">Select a Recipient</option>`;
+	data.rows.forEach((row) => {
+		options += `<option value="${row.account_id}"
+      ${row.account_id === Number(selectedOption) ? "selected" : ""}>
+      ${row.account_firstname} ${row.account_lastname}
+      </option>`;
+	});
+	return options;
+};
+
+Util.getAccountMessages = async function (account_id) {
+	let data = await msgModel.getNewMsgCount(account_id);
+	let dataTable;
+	if (data.rowCount === 0) {
+		dataTable = "<h3>No new messages</h3>";
+	} else {
+		dataTable = '<table id="inboxMessagesDisplay"><thead>';
+		dataTable +=
+			"<tr><th>Read</th><th>Recieved</th><th>Subject</th><th>From</th></tr>";
+		dataTable += "</thead>";
+		// Set up the table body
+		dataTable += "<tbody>";
+		// Iterate over all messages in the array and put each in a row
+		data.rows.forEach((row) => {
+			dataTable += `<tr><td><div class="bubble`;
+			if (row.message_read) {
+				dataTable += ` true"`;
+			} else {
+				dataTable += ` false"`;
+			}
+			dataTable += `></div></td>`;
+			dataTable += `<td>${row.message_created.toLocaleString(
+				"en-US",
+				"narrow"
+			)}</td>`;
+			dataTable += `<td><a href='/inbox/view/${row.message_id}' title='Click to view message'>${row.message_subject}</a></td>`;
+			dataTable += `<td>${row.account_firstname} ${row.account_lastname}</td></tr>`;
+		});
+		dataTable += "</tbody></table>";
+	}
+	return dataTable;
+};
+
+/* ************************
+ * Constructs archived messages on account_id
+ ************************** */
+Util.getArchivedMessages = async function (account_id) {
+	let data = await msgModel.getArchivedMessagesByAccountId(account_id);
+	let dataTable;
+	if (data.rowCount === 0) {
+		dataTable = "<h3>No archived messages</h3>";
+	} else {
+		dataTable = '<table id="inboxMessagesDisplay"><thead>';
+		dataTable +=
+			"<tr><th>Read</th><th>Recieved</th><th>Subject</th><th>From</th></tr>";
+		dataTable += "</thead>";
+		// Set up the table body
+		dataTable += "<tbody>";
+		// Iterate over all messages in the array and put each in a row
+		data.rows.forEach((row) => {
+			dataTable += `<tr><td><div class="bubble`;
+			if (row.message_read) {
+				dataTable += ` true"`;
+			} else {
+				dataTable += ` false"`;
+			}
+			dataTable += `></div></td>`;
+			dataTable += `<td>${row.message_created.toLocaleString(
+				"en-US",
+				"narrow"
+			)}</td>`;
+			dataTable += `<td><a href='/inbox/view/${row.message_id}' title='Click to view message'>${row.message_subject}</a></td>`;
+			dataTable += `<td>${row.account_firstname} ${row.account_lastname}</td></tr>`;
+		});
+		dataTable += "</tbody></table>";
+	}
+	return dataTable;
+};
+
+/* ****************************************
+ *  Check Admin or Employee
+ * ************************************ */
+Util.isAuthorized = async (req, res, next) => {
+	let auth = 0;
+	if (res.locals.loggedin) {
+		const account = res.locals.accountData;
+		account.account_type == "Admin" || account.account_type == "Employee"
+			? (auth = 1)
+			: (auth = 0);
+	}
+	if (!auth) {
+		req.flash("notice", "Please log in");
+		res.redirect("/account/login");
+		return;
+	} else {
+		next();
+	}
+};
+
+/* ****************************************
+ *  For all to be able to view the message when logged in
+ *  So that people who are no
+ * ************************************ */
+Util.isAuthorizedToViewInbox = async (req, res, next) => {
+	let auth = 0;
+	if (res.locals.loggedin) {
+		const account = res.locals.accountData;
+		account.account_type == "Admin" ||
+		account.account_type == "Employee" ||
+		account.account_type == "Client"
+			? (auth = 1)
+			: (auth = 0);
+	}
+	if (!auth) {
+		req.flash("notice", "Please log in");
+		res.redirect("/account/login");
+		return;
+	} else {
+		next();
 	}
 };
 

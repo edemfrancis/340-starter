@@ -23,6 +23,9 @@ const bodyParser = require("body-parser");
 // This was added in week 5
 const cookieParser = require("cookie-parser");
 
+// added message route in week 6
+const messageRoute = require("./routes/messageRoutes");
+
 /* ***********************
  * View and Templates
  *************************/
@@ -71,6 +74,10 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 // Week 3 - Inventory Route was added
 app.use("/inv", inventoryRoute);
 app.use("/account", accountRoute);
+
+// added message route in week 6
+// Mount message routes at /inbox so routes like "/" map to /inbox/
+app.use("/inbox", messageRoute); // added in week 6
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

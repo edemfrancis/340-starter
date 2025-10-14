@@ -1,0 +1,39 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+  <% } else {
+    res.redirect('/')
+  } %>
+  
+  <!-- displays error messages -->
+  <%- messages() %>
+  
+  <!-- display the contents of the page -->
+  <form class="form" action="/inbox/sendMessageAgain" method="post">
+    <fieldset class="form--fieldset"> 
+      <label for="message_to">To:</label>
+      <select name="message_to" id="message_to">
+        <%- accountSelect %>
+      </select>
+      
+      <input type="hidden" id="message_from" name="message_from" value="<%= locals.message_from ? locals.message_from : accountData.account_id %>">
+  
+      <label for="message_subject">Subject:</label>
+      <input type="text" id="message_subject" name="message_subject" value="<%= locals.message_subject %>" required>
+  
+      <label for="message_body">Message:</label>
+      <textarea id="message_body" name="message_body" cols="40" rows="5" required><%= locals.message_body %></textarea>
+  
+      <input type="submit" value="Send">
+    </fieldset>
+  </form>
+
+    <div class="management-links inbox-links" >
+    <a href="/inbox/archive">View archived messages (<%= archivedMessageCount %>)</a>
+  </div>
+  
+  <%- inboxMessages %>
+
+  <div class="management-links">
+    <a href="/inbox">Back to Inbox</a>
+
+  </div>

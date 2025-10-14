@@ -1,0 +1,17 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+  <% } else {
+    res.redirect('/')
+  } %>
+  
+  
+  <!-- displays error messages -->
+  <%- messages() %>
+  
+  <!-- send new message /account/send -->
+  <div class="management-links inbox-links" >
+    <a href="/inbox/send">Send Message</a>
+    <a href="/inbox/archive">View archived messages (<%= archivedMessageCount %>)</a>
+  </div>
+  
+  <%- inboxMessages %>
