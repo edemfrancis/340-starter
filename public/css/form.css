@@ -27,7 +27,7 @@ form input[type="text"] {
 	appearance: none;
 }
 
-form input[type="submit"] {
+form input[type="submit"], .check-button {
 	border: none;
 	background-color: #b97570d5;
 	color: #ffff;
@@ -40,7 +40,7 @@ form input[type="submit"] {
 	cursor: pointer;
 }
 
-form input[type="submit"]:hover {
+form input[type="submit"]:hover, .check-button:hover {
 	background-color: #caa9a7d5;
 	box-shadow: 4px 4px 4px black;
 }
@@ -55,6 +55,7 @@ form input[type="submit"]:hover {
 .check-button {
 	width: 200px;
 }
+
 
 /* Error message display when input field is empty or not field out properly */
 .notice ul {

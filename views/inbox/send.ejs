@@ -18,7 +18,7 @@
       <select name="message_to" id="message_to">
         <%- accountSelect %>
       </select>
-      <input type="hidden" id="message_from" name="message_from" value="<%= locals.message_from ? locals.message_from : accountData.account_id %>">
+      <input required type="hidden" id="message_from" name="message_from" value="<%= locals.message_from ? locals.message_from : accountData.account_id %>">
 
 
   
